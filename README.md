@@ -1,5 +1,20 @@
 # CloudboxFrontend
 
+CloudBox is a full-stack cloud storage application that enables users to upload, manage, and share files securely. This repository contains the frontend built with Angular and Ionic.
+
+🚀 Features
+🔹 User Interface
+Responsive Design: Optimized for both web and mobile.
+Intuitive File Management: Supports drag-and-drop file uploads.
+Folder Management: Create and delete folders.
+🔹 User Authentication
+JWT-based Authentication: Secure login and session management.
+OTP Verification: Email-based OTP for user registration and password reset.
+🔹 File Operations
+Multiple File Uploads: Batch uploads with progress tracking.
+File Downloads: Download files instantly.
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.12.
 
 ## Development server
@@ -25,20 +40,3 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-
-
-
-CloudBox is a full-stack cloud storage application that enables users to upload, manage, and share files securely. This repository contains the frontend built with Angular and Ionic.
-
-🚀 Features
-🔹 User Interface
-Responsive Design: Optimized for both web and mobile.
-Intuitive File Management: Supports drag-and-drop file uploads.
-Folder Management: Create and delete folders.
-🔹 User Authentication
-JWT-based Authentication: Secure login and session management.
-OTP Verification: Email-based OTP for user registration and password reset.
-🔹 File Operations
-Multiple File Uploads: Batch uploads with progress tracking.
-File Downloads: Download files instantly.
