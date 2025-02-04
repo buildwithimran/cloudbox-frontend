@@ -1,0 +1,140 @@
+<div class="flex justify-center items-center h-screen bg-gray-100">
+  <div class="bg-white p-8 rounded-lg w-96 main-box">
+    <h2 class="text-2xl font-bold text-center mb-6">{{ isLoginMode ? 'Login' : 'Register' }}</h2>
+
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="!isLoginMode" class="mb-2">
+        <label class="block text-gray-800">Name</label>
+        <input formControlName="name" type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none"
+          placeholder="Enter your name">
+      </div>
+
+      <div class="mb-2">
+        <label class="block text-gray-800">Email</label>
+        <input formControlName="email" type="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none"
+          placeholder="Enter your email">
+      </div>
+
+      <div class="mb-2 relative">
+        <label class="block text-gray-800">Password</label>
+        <input formControlName="password" [type]="showPassword ? 'text' : 'password'"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none" placeholder="Enter your password">
+        <span class="absolute right-3 top-9 cursor-pointer" (click)="toggleShowPassword()">
+          {{ showPassword ? '👁️' : '🙈' }}
+        </span>
+      </div>
+
+      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg"
+        [disabled]="authForm.invalid || isDisable">
+        {{ isLoginMode ? 'Login' : 'Register' }}
+      </button>
+    </form>
+
+    <p class="text-center mt-4 text-sm">
+      {{ isLoginMode ? "Don't have an account?" : "Already have an account?" }}
+      <a (click)="toggleMode()" class="text-blue-500 cursor-pointer">
+        {{ isLoginMode ? 'Sign up' : 'Login' }}
+      </a>
+    </p>
+
+    <p *ngIf="isLoginMode" class="text-center text-sm" (click)="openResetPasswordModal()">
+      Forgot password?
+      <a (click)="openResetPasswordModal()" class="text-blue-500 cursor-pointer">
+        Reset Password
+      </a>
+    </p>
+
+  </div>
+</div>
+
+
+<!-- OTP Popup Template -->
+<ng-template #otpPopup let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">
+        Verify OTP
+      </h2>
+    </div>
+
+    <div class="modal-body mb-5">
+      <p class="text-gray-600 mb-4">
+        Please enter the 6-digit OTP sent to your registered email to verify your account.
+      </p>
+      <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{ length: 6 }"></ng-otp-input>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Reset Password Popup Template -->
+<ng-template #resetPasswordRequestPopup let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">
+        Reset Password
+      </h2>
+    </div>
+
+    <div class="modal-body">
+      <p class="text-gray-600 mb-4">
+        Please enter your email to receive a password reset link.
+      </p>
+      <form [formGroup]="resetPasswordRequestForm">
+        <div class="mb-4">
+          <label class="block text-gray-400">Email</label>
+          <input type="email" formControlName="email" name="email"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none" placeholder="Enter your email" required>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn cancelButton" (click)="dismissModal()">Cancel</button>
+      <button class="btn saveButton" type="submit"
+        [disabled]="!resetPasswordRequestForm.valid || isDisable" (click)="resetPasswordRequestSubmit()">
+        <div class="spinner-border text-primary" *ngIf="isDisable"></div>
+        Create
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Reset Password Popup Template -->
+<ng-template #resetPasswordPopup let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">
+        Reset Password
+      </h2>
+    </div>
+
+    <div class="modal-body">
+      <p class="text-gray-600 mb-4">
+        Please enter your email to receive a password reset link.
+      </p>
+      <form [formGroup]="resetPasswordForm">
+        <div class="mb-4">
+          <label class="block text-gray-400">Email</label>
+          <input type="email" formControlName="email" name="email" [disabled]="true"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none" placeholder="Enter your email" required>
+
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-400">Password</label>
+          <input type="password" formControlName="password" name="password"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none" placeholder="xxxxxx" required>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn cancelButton" (click)="dismissModal()">Cancel</button>
+      <button class="btn saveButton" type="submit" [disabled]="!resetPasswordForm.valid || isDisable"
+        (click)="updatePassword()">
+        <div class="spinner-border text-primary" *ngIf="isDisable"></div>
+        Create
+      </button>
+    </div>
+  </div>
+</ng-template>

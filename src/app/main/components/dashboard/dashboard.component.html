@@ -1,0 +1,89 @@
+<div class="container" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)"
+  [class.drag-over]="isDragOver">
+
+  <!-- Add New Folder Button -->
+  <div class="d-flex justify-content-between align-items-center mt-3">
+    <h2 class="h4">File Manager</h2>
+    <button class="launchPopup" (click)="openDirectoryPopup(directoryPopup)">
+      <i class="fas fa-folder-plus me-2"></i> Add New Folder
+    </button>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress" *ngIf="isUploading">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [style.width.%]="progress">
+      {{ progress }}%
+    </div>
+  </div>
+
+  <ng-container *ngIf="!loading else WaitState">
+
+    <!-- Drag & Drop Upload Area -->
+    <div class="no-folder-box text-center text-muted mt-4">
+      <img src="assets/images/empty_state_home.svg" class="img-fluid presentation" alt="No files available">
+      <p class="empty-view-content-suggested-items mt-3">Drag your files and folders here or click the button below to
+        upload</p>
+
+      <input type="file" #fileInput hidden (change)="onFileSelect($event)" multiple>
+      <button class="btn btn-primary mt-3" (click)="triggerFileInput()">
+        <i class="fas fa-upload me-2"></i> Upload Files
+      </button>
+    </div>
+
+    <!-- Display Folders -->
+    <div *ngIf="folders.length > 0" class="mt-5">
+      <h3 class="h4 mb-3">Your Folders</h3>
+      <div class="list-group">
+        <div *ngFor="let folder of folders"
+          class="list-group-item d-flex justify-content-between align-items-center folder-item">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-folder text-warning me-2"></i>
+            <span class="fw-medium folder-name" (click)="navigateToFiles(folder._id)">{{ folder.name }}</span>
+          </div>
+          <i class="fas fa-trash-alt text-danger cursor-pointer" (click)="deleteFolder(folder._id)"
+            title="Delete Folder"></i>
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+
+  <!-- Loader -->
+  <ng-template #WaitState>
+    <div class="d-flex justify-content-center mt-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+<!-- Folder creation modal -->
+<ng-template #directoryPopup let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Create New Folder</h5>
+      <i class="fas fa-times btn-close" (click)="modal.dismiss('Cross click')"></i>
+    </div>
+
+    <div class="modal-body">
+      <form [formGroup]="folderForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="folderName" class="form-label">Enter Folder Name</label>
+          <input type="text" id="folderName" formControlName="name" class="form-control" placeholder="New folder">
+          <div *ngIf="folderForm.get('name')?.invalid && folderForm.get('name')?.touched" class="text-danger small">
+            Name is required.
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn cancelButton" (click)="cancel()">Cancel</button>
+      <button class="btn saveButton" type="submit" [disabled]="folderForm.invalid || isSubmitted" (click)="onSubmit()">
+        <div class="spinner-border text-primary" *ngIf="isSubmitted"></div>
+        Create
+      </button>
+    </div>
+  </div>
+</ng-template>

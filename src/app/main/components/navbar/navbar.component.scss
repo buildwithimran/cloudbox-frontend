@@ -1,0 +1,9 @@
+@import "../../../../theme/variables";
+
+.navbar {
+  background: $btn-bg-color-web-account;
+
+  .navbar-brand {
+    cursor: pointer;
+  }
+}

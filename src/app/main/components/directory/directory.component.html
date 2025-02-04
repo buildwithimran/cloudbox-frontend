@@ -1,0 +1,49 @@
+<div class="container">
+  <!-- Progress Bar -->
+  <div class="progress mt-3" *ngIf="isUploading">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [style.width.%]="progress">
+      {{ progress }}%
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Left Side: Uploaded Files -->
+    <div class="col-md-6">
+      <h3 class="h4">Files in <b>{{ folder!.name }}</b> Folder</h3>
+
+      <!-- File List -->
+      <ul class="list-group mt-3">
+        <li *ngFor="let file of files" class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="left-side">
+            <span class="title">
+              {{ file.name | titlecase}}
+            </span>
+            <span class="date">
+              {{ file.createdAt | date: "short" }}
+            </span>
+          </div>
+          <div class="right-side">
+            <i class="fas fa-download text-primary me-2 cursor-pointer" (click)="downloadFile(file)"></i>
+            <i class="fas fa-trash text-danger cursor-pointer" (click)="deleteFile(file._id)"></i>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right Side: Drag & Drop Upload Area -->
+    <div class="col-md-6">
+      <div class="no-folder-box text-center text-muted mt-4" (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)" (drop)="onDrop($event)" [class.drag-over]="isDragOver">
+        <img src="assets/images/empty_state_home.svg" class="img-fluid presentation" alt="No files available">
+        <p class="empty-view-content-suggested-items mt-3">Drag your files and folders here or click the button below to
+          upload</p>
+
+        <input type="file" #fileInput hidden (change)="onFileSelect($event)" multiple>
+        <button class="btn btn-primary mt-3" (click)="triggerFileInput()">
+          <i class="fas fa-upload me-2"></i> Upload Files
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

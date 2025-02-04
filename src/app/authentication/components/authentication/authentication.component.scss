@@ -1,0 +1,19 @@
+@import "../../../../theme/variables";
+
+.main-box {
+  border: 1px solid #ebebeb;
+}
+
+ng-otp-input {
+  margin: auto;
+  text-align: center;
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.5;
+  cursor: no-drop;
+}
+
+button[type="submit"] {
+  background: $btn-bg-color-web-account;
+}

@@ -1,0 +1,195 @@
+@import'./../src/theme/variables';
+
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+.launchPopup {
+  font-family: "Titillium Web", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  height: 48px;
+  min-width: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  outline: none;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: none;
+  transition: all 0.3s linear;
+  margin: 0px;
+  color: $whiteColor;
+  background: $btn-bg-color-web-account;
+}
+
+.launchPopup:hover {
+  color: $btn-bg-color-web-account;
+  background-color: #FFFFFF;
+  border: 1px solid #48484866;
+}
+
+.text-danger {
+  padding-top: 3px;
+  padding-left: 3px;
+}
+
+.modal-content {
+  border: none;
+  background: transparent;
+  border-radius: 20px 20px;
+
+  .modal-content {
+    background: white;
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: none;
+
+      .modal-title {
+        line-height: 1;
+        color: $secondaryColor;
+        font-weight: 600;
+        font-size: 24px;
+      }
+
+      .btn-close {
+        border-radius: 100%;
+        height: 18px;
+        width: 18px;
+        line-height: 19px;
+        text-align: center;
+        cursor: pointer;
+        color: $secondaryColor;
+        background: #f2f2f5;
+        border: 1px solid #f2f2f5;
+        opacity: 0.8;
+      }
+
+      .btn-close:hover {
+        color: $secondaryColor;
+        background: #f2f2f5;
+        border: 1px solid #f2f2f5;
+      }
+    }
+
+    .modal-body {
+
+      label.form-label {
+        font-family: $primary-font-family;
+        font-size: 15px;
+        color: $secondaryColor;
+        margin: 0px 0px 5px 5px;
+      }
+
+      .required {
+        color: red;
+      }
+
+      ::placeholder {
+        font-family: $primary-font-family;
+        font-weight: 400;
+      }
+
+      input {
+        font-family: $primary-font-family;
+        font-size: 16px;
+        border-radius: 6px;
+        background: $bgColor;
+        color: $secondaryColor;
+        border: 1px solid $borderColor;
+        height: 56px;
+        padding: 0px 15px;
+        outline: none;
+        box-shadow: none;
+      }
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border: none;
+
+
+      .saveButton {
+        font-size: 17px;
+        font-family: $primary-font-family;
+        background: $btn-bg-color-web-account;
+        color: $whiteColor;
+        border: none;
+        min-width: 135px;
+        min-height: 45px;
+        border-radius: 8px;
+        border: 2px solid $btn-bg-color-web-account;
+        text-transform: capitalize;
+        margin: 0px;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+
+        .spinner-border {
+          font-size: 15px;
+          width: 22px;
+          color: $whiteColor;
+          height: 22px;
+          position: relative;
+          top: 0px;
+          margin-right: 5px;
+        }
+
+      }
+
+      .saveButton:hover {
+        background: transparent;
+        color: $btn-bg-color-web-account;
+
+        .spinner-border {
+          color: $btn-bg-color-web-account;
+        }
+      }
+
+      .cancelButton {
+        font-family: $primary-font-family;
+        font-size: 17px;
+        background: transparent;
+        color: $btn-bg-color-web-account;
+        border: 2px solid $btn-bg-color-web-account;
+        min-height: 45px;
+        min-width: 135px;
+        border-radius: 8px;
+        text-transform: capitalize;
+        margin: 0px;
+      }
+
+      .cancelButton:hover {
+        background: $btn-bg-color-web-account;
+        color: $whiteColor;
+      }
+    }
+  }
+
+}
